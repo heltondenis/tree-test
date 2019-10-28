@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "heroku": "^7.33.3",
     "path": "^0.12.7",
+    "primeflex": "^1.0.0",
     "primeicons": "^2.0.0",
     "primeng": "^8.1.1",
     "rxjs": "~6.3.3",

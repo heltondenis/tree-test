@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 
 /** Components */
 import { AppComponent } from './app.component';
@@ -28,7 +31,10 @@ import { ListComponent } from './list/list.component';
     ReactiveFormsModule,
     AutoCompleteModule,
     RadioButtonModule,
-    CardModule
+    CardModule,
+    ButtonModule,
+    InputTextModule,
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

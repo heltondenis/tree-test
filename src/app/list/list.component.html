@@ -1,9 +1,16 @@
 <p-card>
   <h2>Products</h2>
-  <input id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)" placeholder="filter nodes" />
-  <button (click)="tree.treeModel.clearFilter()">Clear Filter</button>
+  <div class="icons">
+    <i class="pi pi-plus-circle" style="font-size: 2em; margin-top: 5px; color: #00995D;"
+      (click)="tree.treeModel.clearFilter()"></i>
+    <i class="pi pi-user-edit" style="font-size: 2em; margin-top: 5px;" (click)="tree.treeModel.clearFilter()"></i>
+    <i class="pi pi-trash" style="font-size: 2em; margin-top: 5px; color: rgba(255, 0, 0, 0.74);"
+      (click)="removeNode(tree.treeModel)"></i>
+  </div>
+  <input type="text" pInputText id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)"
+    placeholder="filter nodes" />
+  <hr>
   <tree-root #tree [focused]="false" [options]="options" [nodes]="nodes"></tree-root>
-  <br><br>
   <hr>
   <!-- main app container -->
   <div class="jumbotron">

@@ -17,37 +17,44 @@ export class ListComponent implements OnInit {
     allowDragoverStyling: false
   };
 
+  /** could have a service serving the data but I added it statically */
   nodes = [
     {
-      name: 'China',
+      name: 'Electronics',
       children: [
-        { name: 'Argentina' },
-        { name: 'Brazil' }
+        { name: 'Calculators', description: 'Calculators' },
+        { name: 'HD media player' },
+        { name: 'Drone' }
       ]
     },
     {
-      name: 'South America',
+      name: 'Computers',
       children: [
-        { name: 'Argentina' },
-        { name: 'Brazil' }
+        { name: 'Printers' },
+        { name: 'Monitors' },
+        { name: 'Gamer Notebook' },
+        { name: 'Servers' },
       ]
     },
     {
-      name: 'Europe',
+      name: 'Hardware',
       children: [
-        { name: 'England' },
-        { name: 'Germany' },
-        { name: 'France' },
-        { name: 'Italy' },
-        { name: 'Spain' }
+        { name: 'Coolers' },
+        { name: 'Modem' },
+        { name: 'Streamer' },
+        { name: 'Drives' },
+        { name: 'RAM memory' }
       ]
     }
   ];
 
   registerForm: FormGroup;
   editForm: FormGroup;
-
   submitted = false;
+
+  /** Dialogs properties */
+  displayRegister: Boolean = false;
+  displayEdit: Boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
 
@@ -68,30 +75,44 @@ export class ListComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
+  /** Submits */
   onSubmitRegister(tree: any) {
-    this.submitted = true;
-    this.nodes[this.registerForm.value.node].children.push({
-      name: this.registerForm.value.name
-    });
-    tree.treeModel.update();
+    if (this.registerForm.value.name === '') {
+      alert('Vazio');
+    } else {
+      this.submitted = true;
+      this.nodes[this.registerForm.value.node].children.push({
+        name: this.registerForm.value.name
+      });
+      tree.treeModel.update();
+      this.displayRegister = false;
+    }
   }
 
   onSubmitEdit(treeModel: any) {
-
     if (treeModel.activeNodes.length === 0) {
-      alert('Clique em cima do item');
+      alert('Click on the item');
     }
-
     this.submitted = true;
     treeModel.activeNodes[0].data.name = this.editForm.value.name;
     treeModel.update();
+    this.displayEdit = false;
   }
 
+  /** Dialogs */
+  openRegisterDialog() {
+    this.displayRegister = true;
+  }
+
+  openEditDialog() {
+    this.displayEdit = true;
+  }
+
+  /** Functions */
   removeNode(treeModel: any) {
     if (treeModel.activeNodes.length === 0) {
-      alert('Clique em cima do item');
+      alert('Click on the item');
     } else {
-
       _.remove(this.nodes, (e) => {
         return e.id === treeModel.activeNodes[0].data.id;
       });

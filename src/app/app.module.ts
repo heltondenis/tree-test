@@ -12,6 +12,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 /** Components */
 import { AppComponent } from './app.component';
@@ -35,6 +36,8 @@ import { ListComponent } from './list/list.component';
     ButtonModule,
     InputTextModule,
     DialogModule,
+    TooltipModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

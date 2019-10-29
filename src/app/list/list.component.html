@@ -1,53 +1,73 @@
 <p-card>
   <h2>Products</h2>
   <div class="icons">
+    <!-- Register Dialog -->
+    <p-dialog header="Add Products" [(visible)]="displayRegister">
+      <!-- Column -->
+      <div class="p-grid">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister(tree)">
+          <h5>SELECT PRODUCTS:</h5>
+          <div class="p-col-12">
+            <label>
+              Eletronics
+              <p-radioButton name="groupname" value="0" formControlName="node"></p-radioButton>
+            </label>
+          </div>
+          <div class="p-col-12">
+            <label>
+              Computers
+              <p-radioButton name="groupname" value="1" formControlName="node"></p-radioButton>
+            </label>
+          </div>
+          <div class="p-col-12">
+            <label>
+              Hardware
+              <p-radioButton name="groupname" value="2" formControlName="node"></p-radioButton>
+            </label>
+          </div>
+          <hr>
+          <div class="p-col">
+            <div class="ui-g-12 ui-md-4">
+              <div class="ui-inputgroup">
+                <input pInputText placeholder="Enter a product name" type="text" formControlName="name"
+                  class="form-control">
+                <button pButton icon="pi pi-check" class="ui-button-success"></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </p-dialog>
+    <!-- Edit Dialog -->
+    <p-dialog header="Edit Products" [(visible)]="displayEdit">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit(tree.treeModel)">
+        <div class="p-col">
+          <div class="ui-g-12 ui-md-4">
+            <div class="ui-inputgroup">
+              <input pInputText placeholder="Enter a product name" type="text" formControlName="name"
+                class="form-control">
+              <button pButton icon="pi pi-check" class="ui-button-success"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
+    <!-- Buttons -->
     <i class="pi pi-plus-circle" style="font-size: 2em; margin-top: 5px; color: #00995D;"
-      (click)="tree.treeModel.clearFilter()"></i>
-    <i class="pi pi-user-edit" style="font-size: 2em; margin-top: 5px;" (click)="tree.treeModel.clearFilter()"></i>
+      (click)="openRegisterDialog()">
+    </i>
+    <!-- Edit -->
+    <i class="pi pi-user-edit" style="font-size: 2em; margin-top: 5px;" (click)="openEditDialog()"
+      (click)="tree.treeModel.clearFilter()">
+    </i>
+    <!-- Remove -->
     <i class="pi pi-trash" style="font-size: 2em; margin-top: 5px; color: rgba(255, 0, 0, 0.74);"
-      (click)="removeNode(tree.treeModel)"></i>
+      (click)="removeNode(tree.treeModel)">
+    </i>
   </div>
   <input type="text" pInputText id="filter" #filter (keyup)="tree.treeModel.filterNodes(filter.value)"
     placeholder="filter nodes" />
   <hr>
+  <!-- Tree -->
   <tree-root #tree [focused]="false" [options]="options" [nodes]="nodes"></tree-root>
-  <hr>
-  <!-- main app container -->
-  <div class="jumbotron">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister(tree)">
-            <div class="form-group">
-              <input type="text" formControlName="name" class="form-control" />
-              <label>
-                1
-                <p-radioButton name="groupname" value="0" formControlName="node"></p-radioButton>
-              </label>
-              <label>
-                2
-                <p-radioButton name="groupname" value="1" formControlName="node"></p-radioButton>
-              </label>
-              <label>
-                3
-                <p-radioButton name="groupname" value="2" formControlName="node"></p-radioButton>
-              </label>
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary">Cadastrar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit(tree.treeModel)">
-    <div class="form-group">
-      <input type="text" formControlName="name" class="form-control" />
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary">Editar</button>
-    </div>
-  </form>
-  <button (click)="removeNode(tree.treeModel)">Remover</button>
 </p-card>
